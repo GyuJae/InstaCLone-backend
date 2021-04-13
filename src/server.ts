@@ -8,16 +8,36 @@ import client from "./client";
 
 import { getUser } from "./users/users.utils";
 
+type ParamsType = {
+  token: string;
+};
+
 const apollo = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req }) => {
-    if (req) {
+  context: async (ctx) => {
+    if (ctx.req) {
       return {
-        loggedUser: await getUser(req.headers.token),
+        loggedUser: await getUser(ctx.req.headers.token),
         client,
       };
+    } else {
+      const {
+        connection: { context },
+      } = ctx;
+      return {
+        loggedUser: context.loggedUser,
+      };
     }
+  },
+  subscriptions: {
+    onConnect: async ({ token }: ParamsType) => {
+      if (!token) {
+        throw new Error("You can't listen.");
+      }
+      const loggedUser = await getUser(token);
+      return { loggedUser };
+    },
   },
 });
 

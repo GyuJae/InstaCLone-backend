@@ -1,0 +1,42 @@
+{
+  "name": "instaclone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions",
+    "dev": "nodemon --exec ts-node src/server --ext ts --delay 2 --watch src/",
+    "migrate": "npx prisma migrate dev --name add-profile",
+    "migrate-reset": "npx prisma migrate reset --preview-feature",
+    "studio": "npx prisma studio"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/aws-sdk": "^2.7.0",
+    "@types/bcrypt": "^3.0.0",
+    "@types/graphql-upload": "^8.0.4",
+    "@types/jsonwebtoken": "^8.5.1",
+    "apollo-server": "^2.22.1",
+    "apollo-server-express": "^2.22.1",
+    "aws-sdk": "^2.884.0",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.5.0",
+    "graphql-tools": "^7.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@prisma/client": "^2.20.1",
+    "nodemon": "^2.0.7",
+    "prisma": "^2.19.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  },
+  "resolutions": {
+    "fs-capacitor": "^6.2.0",
+    "graphql-upload": "^11.0.0"
+  }
+}
